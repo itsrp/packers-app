@@ -29,6 +29,9 @@ public class HomeController {
     
     @Autowired
 	private ConfigurableApplicationContext springContext;
+    
+    @Autowired
+    private CustomerController customerController;
 	
 	@FXML
     private void onMouseClicked(MouseEvent event) throws IOException {
@@ -39,13 +42,7 @@ public class HomeController {
 		
 		if(buttonText.equals("Customer")) {
 			LOGGER.info("Customer button pressed.");
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/customerView.fxml"));
-			fxmlLoader.setControllerFactory(springContext::getBean);
-	        rootNode = fxmlLoader.load();
-	        stage.setScene(new Scene(rootNode, Screen.getMainScreen().getWidth(),
-	        		Screen.getMainScreen().getHeight()));
-	        stage.setMaximized(false);
-	        stage.show();
+			customerController.loadCustomerScreen(stage);
 		}
     }
 

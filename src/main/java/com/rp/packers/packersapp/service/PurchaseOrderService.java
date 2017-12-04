@@ -1,5 +1,7 @@
 package com.rp.packers.packersapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,11 @@ public class PurchaseOrderService implements CrudService<PurchaseOrder>{
 	@Override
 	public void delete(Long id) {
 		repository.delete(id);
+	}
+
+	@Override
+	public List<PurchaseOrder> getAll() {
+		return repository.findAll();
 	}
 
 }
