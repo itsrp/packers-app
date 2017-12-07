@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class PurchaseOrder {
+public class PurchaseOrder extends Model{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

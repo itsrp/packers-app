@@ -36,7 +36,7 @@ public class HomeController {
 		
 		if(buttonText.equals("Customer")) {
 			LOGGER.info("Customer button pressed.");
-			customerController.loadCustomerScreen(stage);
+			customerController.loadScreen(stage);
 		}
     }
 

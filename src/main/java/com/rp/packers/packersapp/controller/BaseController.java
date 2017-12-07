@@ -99,13 +99,13 @@ public abstract class BaseController<T extends Model> {
 	}
 	
 	@FXML
-	private void edit(MouseEvent event) {
+	protected void edit(MouseEvent event) {
 		LOGGER.info("Edit : " + selectedObj.getId());
 		dispatch(ActionEnum.EDIT, event, null);
 	}
 	
 	@FXML
-	private void delete(MouseEvent event) {
+	protected void delete(MouseEvent event) {
 		LOGGER.info("Delete : " + selectedObj.getId());
 		getService().delete(selectedObj.getId());
 	}

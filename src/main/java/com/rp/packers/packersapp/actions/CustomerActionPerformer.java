@@ -105,7 +105,9 @@ public class CustomerActionPerformer implements ActionPerformer<Customer>{
 		Customer newCustomer = buildCustomer(name, address, vatOrTin, vendorCode, selectedCustomer);
 		customerService.create(newCustomer);
 		message.setText("Customer saved successfully.");
-		customers.add(newCustomer);
+		if(selectedCustomer == null) {
+			customers.add(newCustomer);
+		}
 	}
 	
 	private Customer buildCustomer(String name, String address, String vatOrTin, String vendorCode, Customer selectedCustomer) {
