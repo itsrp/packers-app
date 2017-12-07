@@ -31,7 +31,7 @@
             <Button fx:id="searchButton" onMouseClicked="#searchBy" disable="true" layoutX="258.0" layoutY="173.0" mnemonicParsing="false" text="Search" />
             <ScrollPane layoutX="18.0" layoutY="267.0" prefHeight="400.0" prefWidth="555.0">
                <content>
-               <TableView fx:id="customerTable" prefHeight="500.0" prefWidth="536.0">
+               <TableView fx:id="table" prefHeight="500.0" prefWidth="536.0">
                  <columns>
                    <TableColumn fx:id="customerId" prefWidth="85.0" text="ID" />
                    <TableColumn fx:id="customerName" prefWidth="223.0" text="NAME" />
@@ -46,9 +46,9 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="559.0">
          <children>
-            <Button layoutX="24.0" layoutY="56.0" mnemonicParsing="false" text="New" onMouseClicked="#newCustomer"/>
-            <Button fx:id="editButton" disable="true" layoutX="105.0" layoutY="56.0" mnemonicParsing="false" text="Edit" />
-            <Button fx:id="deleteButton" disable="true" layoutX="181.0" layoutY="56.0" mnemonicParsing="false" text="Delete" />
+            <Button layoutX="24.0" layoutY="56.0" mnemonicParsing="false" text="New" onMouseClicked="#createNew"/>
+            <Button fx:id="editButton" onMouseClicked="#edit" disable="true" layoutX="105.0" layoutY="56.0" mnemonicParsing="false" text="Edit" />
+            <Button fx:id="deleteButton" onMouseClicked="#delete" disable="true" layoutX="181.0" layoutY="56.0" mnemonicParsing="false" text="Delete" />
             <Label layoutX="35.0" layoutY="142.0" text="Customer Name:" />
             <TextField fx:id="custName" layoutX="174.0" layoutY="137.0" prefHeight="26.0" prefWidth="229.0" />
             <Label layoutX="35.0" layoutY="185.0" text="Address:" />
@@ -57,7 +57,7 @@
             <TextField fx:id="vatOrTin" layoutX="174.0" layoutY="300.0" prefHeight="26.0" prefWidth="229.0" />
             <TextField fx:id="vendorCode" layoutX="174.0" layoutY="350.0" prefHeight="26.0" prefWidth="229.0" />
             <Label layoutX="36.0" layoutY="355.0" text="Vendor Code:" />
-            <Button layoutX="33.0" layoutY="430.0" mnemonicParsing="false" text="Save" onMouseClicked="#saveCustomer"/>
+            <Button layoutX="33.0" layoutY="430.0" mnemonicParsing="false" text="Save" onMouseClicked="#save"/>
             <Label fx:id="message" layoutX="36.0" layoutY="500.0" text="" />
          </children></AnchorPane>
   </items>

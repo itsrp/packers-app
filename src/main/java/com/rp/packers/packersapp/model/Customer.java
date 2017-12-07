@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Customer {
+public class Customer extends Model{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -38,8 +38,7 @@ public class Customer {
 		this.vendorCode = vendorCode;
 	}
 
-
-
+	@Override
 	public Long getId() {
 		return id;
 	}

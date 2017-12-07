@@ -2,6 +2,8 @@ package com.rp.packers.packersapp.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import com.rp.packers.packersapp.model.Customer;
 import com.rp.packers.packersapp.repository.CustomerRepository;
 
 @Service
+@Transactional
 public class CustomerService implements CrudService<Customer>{
 	
 	@Autowired
