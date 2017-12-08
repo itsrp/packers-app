@@ -49,6 +49,9 @@ public abstract class BaseController<T extends Model> {
 
 	@FXML
 	protected Button deleteButton;
+	
+	@FXML
+	protected Button saveButton;
 
 	@FXML
 	protected Button searchButton;

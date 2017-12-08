@@ -27,12 +27,12 @@
             <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="112.0" prefWidth="163.0" text="Invoice" GridPane.rowIndex="1">
+      <Button mnemonicParsing="false" prefHeight="112.0" prefWidth="163.0" text="Invoice" GridPane.rowIndex="1" onMouseClicked="#onMouseClicked">
          <GridPane.margin>
             <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="106.0" prefWidth="193.0" text="Report" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Button mnemonicParsing="false" prefHeight="106.0" prefWidth="193.0" text="Report" GridPane.columnIndex="1" GridPane.rowIndex="1" onMouseClicked="#onMouseClicked">
          <GridPane.margin>
             <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
          </GridPane.margin>

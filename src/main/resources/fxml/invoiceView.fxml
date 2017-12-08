@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ComboBox?>
+
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rp.packers.packersapp.controller.InvoiceController">
+	<items>
+		<AnchorPane minHeight="0.0" minWidth="600.0" prefHeight="160.0"
+			prefWidth="600.0">
+			<children>
+				<Label layoutX="195.0" layoutY="39.0" text="Search Invoice">
+					<font>
+						<Font size="22.0" />
+					</font>
+				</Label>
+				<RadioButton fx:id="searchById" layoutX="32.0" layoutY="88.0"
+					mnemonicParsing="false" text="By Invoice ID">
+					<toggleGroup>
+						<ToggleGroup fx:id="searchByGroup" />
+					</toggleGroup>
+				</RadioButton>
+				<RadioButton fx:id="searchByName" layoutX="32.0"
+					layoutY="118.0" mnemonicParsing="false" text="By Customer Name" toggleGroup="$searchByGroup" />
+				<TextField fx:id="searchText" layoutX="14.0" layoutY="173.0"
+					prefHeight="26.0" prefWidth="236.0" />
+				<Button fx:id="searchButton" onMouseClicked="#searchBy"
+					disable="true" layoutX="258.0" layoutY="173.0" mnemonicParsing="false"
+					text="Search" />
+				<ScrollPane layoutX="18.0" layoutY="267.0" prefHeight="400.0"
+					prefWidth="555.0">
+					<content>
+						<TableView fx:id="table" prefHeight="500.0" prefWidth="536.0">
+							<columns>
+								<TableColumn fx:id="invoiceIdColumn" prefWidth="85.0"
+									text="Customer ID" />
+								<TableColumn fx:id="customerNameColumn" prefWidth="223.0"
+									text="Customer Name" />
+							</columns>
+						</TableView>
+					</content>
+				</ScrollPane>
+				<Button layoutX="18.0" layoutY="14.0" mnemonicParsing="false"
+					onMouseClicked="#goToHome" text="Home" />
+
+			</children>
+		</AnchorPane>
+		<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="559.0">
+			<children>
+				<Button layoutX="24.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#createNew" text="New" />
+				<Button fx:id="editButton" disable="true" layoutX="105.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
+				<Button fx:id="deleteButton" disable="true" layoutX="181.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#delete" text="Delete" />
+					
+				<Label layoutX="35.0" layoutY="142.0" text="Customer Name:" />
+				<ComboBox fx:id="customerName" layoutX="174.0" layoutY="137.0" prefHeight="26.0" prefWidth="229.0" />
+					
+				<Label layoutX="36.0" layoutY="185.0" text="Total:" />
+				<TextField fx:id="total" editable="false" layoutX="174.0" layoutY="180.0" prefHeight="26.0" prefWidth="229.0" />
+					
+				<Label layoutX="35.0" layoutY="230.0" text="CGST:" />
+				<TextField fx:id="cgst" layoutX="174.0" layoutY="225.0" prefHeight="26.0" prefWidth="229.0" />
+				
+				<Label layoutX="31.0" layoutY="272.0" text="SGST" />
+				<TextField fx:id="sgst" layoutX="174.0" layoutY="267.0" prefHeight="26.0" prefWidth="229.0" />
+					
+				<Label layoutX="40.0" layoutY="318.0" text="Final Amount:" />
+				<TextField fx:id="finalAmount" editable="false" layoutX="174.0" layoutY="313.0" prefHeight="26.0" prefWidth="229.0" />
+					
+					<Button fx:id="saveButton" layoutX="41.0" disable="true" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#save" text="Save" />
+				<Label fx:id="message" layoutX="36.0" layoutY="550.0" text="" />
+            <ScrollPane layoutX="39.0" layoutY="350.0" prefHeight="244.0" prefWidth="592.0">
+               <content>
+                  <TableView fx:id="orderTable" prefHeight="241.0" prefWidth="589.0">
+                    <columns>
+                      <TableColumn fx:id="selectColumn" prefWidth="30" text="" />
+                      <TableColumn fx:id="orderNoColumn" prefWidth="113.0" text="Order No" />
+                      <TableColumn fx:id="descriptionColumn" prefWidth="139.0" text="Description" />
+                      <TableColumn fx:id="itemCodeColumn" prefWidth="127.0" text="Item Code" />
+                      <TableColumn fx:id="quantityColumn" prefWidth="97.0" text="Quantity" />
+                      <TableColumn fx:id="rateColumn" prefWidth="99.0" text="Rate" />
+                    </columns>
+                  </TableView>
+               </content>
+            </ScrollPane>
+            <Button layoutX="289.0" layoutY="56.0" mnemonicParsing="false" text="Print" />
+			</children>
+		</AnchorPane>
+	</items>
+</SplitPane>

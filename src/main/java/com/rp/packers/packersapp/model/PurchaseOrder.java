@@ -2,12 +2,14 @@ package com.rp.packers.packersapp.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class PurchaseOrder extends Model{
@@ -28,11 +30,14 @@ public class PurchaseOrder extends Model{
 	
 	private Boolean isCompleted;
 	
+	@Transient
+	private Boolean isSelected = Boolean.FALSE;
+	
 	@ManyToOne
 	@JoinColumn(name="customer_id", nullable=false)
 	private Customer customer;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="invoice_id", nullable=true)
 	private Invoice invoice;
 	
@@ -119,5 +124,14 @@ public class PurchaseOrder extends Model{
 	public Long getCustomerId() {
 		return this.customer.getId();
 	}
+
+	public Boolean getIsSelected() {
+		return isSelected;
+	}
+
+	public void setIsSelected(Boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+	
 	
 }

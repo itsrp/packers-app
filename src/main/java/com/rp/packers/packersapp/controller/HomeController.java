@@ -29,6 +29,9 @@ public class HomeController {
     
     @Autowired
     private PurchaseOrderController purchaseOrderController;
+    
+    @Autowired
+    private InvoiceController invoiceController;
 	
 	@FXML
     private void onMouseClicked(MouseEvent event) throws IOException {
@@ -43,6 +46,9 @@ public class HomeController {
 		} else if(buttonText.equals("Purchase Order")) {
 			LOGGER.info("Purchase Order button pressed.");
 			purchaseOrderController.loadScreen(stage);
+		} else if(buttonText.equals("Invoice")) {
+			LOGGER.info("Invoice button pressed.");
+			invoiceController.loadScreen(stage);
 		}
     }
 

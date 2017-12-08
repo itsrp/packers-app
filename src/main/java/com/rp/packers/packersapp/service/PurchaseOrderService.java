@@ -26,6 +26,10 @@ public class PurchaseOrderService implements CrudService<PurchaseOrder>{
 	public void create(PurchaseOrder t) {
 		repository.save(t);
 	}
+	
+	public void saveAll(List<PurchaseOrder> t) {
+		repository.save(t);
+	}
 
 	@Override
 	public void update(PurchaseOrder t) {

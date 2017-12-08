@@ -2,14 +2,17 @@ package com.rp.packers.packersapp.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
-public class Invoice {
+public class Invoice extends Model{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,7 +26,10 @@ public class Invoice {
 	
 	private Double finalAmount;
 	
-	@OneToMany(mappedBy="invoice")
+	@Transient
+	private Boolean isChecked;
+	
+	@OneToMany(mappedBy="invoice", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<PurchaseOrder> orders;
 	
 	public Invoice() {
@@ -76,6 +82,18 @@ public class Invoice {
 
 	public void setOrders(List<PurchaseOrder> orders) {
 		this.orders = orders;
+	}
+
+	public Boolean getIsChecked() {
+		return isChecked;
+	}
+
+	public void setIsChecked(Boolean isChecked) {
+		this.isChecked = isChecked;
+	}
+	
+	public String getCustomerName() {
+		return this.orders.get(0).getCustomer().getName();
 	}
 	
 	
