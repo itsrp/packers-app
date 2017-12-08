@@ -131,13 +131,14 @@ public class OrderActionPerformer implements ActionPerformer<PurchaseOrder>{
 		itemCode.setText(selectedObj.getItemCode());
 		rate.setText(String.valueOf(selectedObj.getRate()));
 		quantity.setText(String.valueOf(selectedObj.getQuantity()));
-		total.setText(String.valueOf(selectedObj.getRate() * selectedObj.getQuantity()));
+		//total.setText(String.valueOf(selectedObj.getRate() * selectedObj.getQuantity()));
 		
 	}
 	
 	@Override
-	public void delete(Long id, Map<Long, PurchaseOrder> orders) {
+	public void delete(Long id, Map<Long, PurchaseOrder> allObj) {
 		service.delete(id);
+		allObj.remove(id);
 	}
 
 }
