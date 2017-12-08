@@ -33,7 +33,7 @@ public class PurchaseOrder extends Model{
 	private Customer customer;
 	
 	@ManyToOne
-	@JoinColumn(name="invoice_id", nullable=false)
+	@JoinColumn(name="invoice_id", nullable=true)
 	private Invoice invoice;
 	
 	public PurchaseOrder() {
@@ -110,6 +110,14 @@ public class PurchaseOrder extends Model{
 
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
+	}
+	
+	public String getCustomerName() {
+		return this.customer.getName();
+	}
+	
+	public Long getCustomerId() {
+		return this.customer.getId();
 	}
 	
 }

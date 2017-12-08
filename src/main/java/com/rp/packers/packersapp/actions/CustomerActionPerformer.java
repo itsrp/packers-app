@@ -3,6 +3,7 @@ package com.rp.packers.packersapp.actions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class CustomerActionPerformer implements ActionPerformer<Customer>{
 	@Autowired
 	private CustomerService customerService;
 	
-	@Override
+	/*@Override
 	public void loadScreen(String fxmlPath, Stage stage) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
 		fxmlLoader.setControllerFactory(springContext::getBean);
@@ -46,34 +47,38 @@ public class CustomerActionPerformer implements ActionPerformer<Customer>{
 		stage.setMaximized(false);
 		stage.show();
 		
-	}
+	}*/
 
 	@Override
-	public void filteredTable(TableView<Customer> customerTable, List<Customer> customers, String searchByCriteria, TextField searchText) {
+	public void filteredTable(TableView<Customer> customerTable, Map<Long, Customer> customers, String searchByCriteria, TextField searchText) {
 		List<Customer> list = new ArrayList<>();
 		if (searchByCriteria != null) {
 			LOGGER.info("searching by: " + searchByCriteria);
 			try {
 				switch (searchByCriteria) {
 				case "By ID":
-					list = customers.stream()
+					list = customers.values().stream()
+			                .collect(Collectors.toList()).stream()
 							.filter(customer -> customer.getId().equals(Long.valueOf(searchText.getText())))
 							.collect(Collectors.toList());
 					break;
 				case "By Name":
-					list = customers.stream()
+					list = customers.values().stream()
+			                .collect(Collectors.toList()).stream()
 							.filter(customer -> customer.getName().toLowerCase().contains(searchText.getText().toLowerCase()))
 							.collect(Collectors.toList());
 					break;
 				default:
-					list = customers;
+					list = customers.values().stream()
+			                .collect(Collectors.toList());
 				}
 			} catch (NumberFormatException e) {
 				LOGGER.error("Exception while searching.", e);
 			}
 		} else {
 			LOGGER.info("searching all ");
-			list = customers;
+			list = customers.values().stream()
+	                .collect(Collectors.toList());
 		}
 		
 		customerTable.getItems().clear();
@@ -82,6 +87,11 @@ public class CustomerActionPerformer implements ActionPerformer<Customer>{
 	}
 
 	public void add(Button editButton, Button deleteButton, TextField custName, TextArea address, TextField vatOrTin, TextField vendorCode, Label message, Customer selectedCustomer) {
+		resetUI(editButton, deleteButton, custName, address, vatOrTin, vendorCode, message, selectedCustomer);
+	}
+
+	public void resetUI(Button editButton, Button deleteButton, TextField custName, TextArea address,
+			TextField vatOrTin, TextField vendorCode, Label message, Customer selectedCustomer) {
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
 		selectedCustomer = null;
@@ -101,12 +111,12 @@ public class CustomerActionPerformer implements ActionPerformer<Customer>{
 		
 	}
 
-	public void save(String name, String address, String vatOrTin, String vendorCode, Customer selectedCustomer, Label message, List<Customer> customers) {
+	public void save(String name, String address, String vatOrTin, String vendorCode, Customer selectedCustomer, Label message, Map<Long, Customer> customers) {
 		Customer newCustomer = buildCustomer(name, address, vatOrTin, vendorCode, selectedCustomer);
 		customerService.create(newCustomer);
 		message.setText("Customer saved successfully.");
 		if(selectedCustomer == null) {
-			customers.add(newCustomer);
+			customers.put(newCustomer.getId(), newCustomer);
 		}
 	}
 	
@@ -121,4 +131,9 @@ public class CustomerActionPerformer implements ActionPerformer<Customer>{
 		return selectedCustomer;
 	}
 
+	@Override
+	public void delete(Long id, Map<Long, Customer> allObj) {
+		customerService.delete(id);
+		allObj.remove(id);
+	}
 }

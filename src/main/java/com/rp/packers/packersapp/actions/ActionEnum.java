@@ -8,6 +8,7 @@ public enum ActionEnum {
 	SEARCH,
 	ADD,
 	EDIT,
-	SAVE;
+	SAVE,
+	DELETE;
 	
 }

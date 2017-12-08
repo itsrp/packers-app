@@ -22,7 +22,7 @@
             <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="110.0" prefWidth="190.0" text="Purchase Order" GridPane.columnIndex="1">
+      <Button mnemonicParsing="false" prefHeight="110.0" prefWidth="190.0" text="Purchase Order" GridPane.columnIndex="1" onMouseClicked="#onMouseClicked">
          <GridPane.margin>
             <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
          </GridPane.margin>

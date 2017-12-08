@@ -1,6 +1,7 @@
 package com.rp.packers.packersapp.controller;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,10 +63,10 @@ public class CustomerController extends BaseController<Customer>{
 		try {
 			switch (action) {
 			case GO_TO_HOME:
-				actionPerformer.loadScreen(HOME_SCREEN_PATH, getStage(event));
+				actionPerformer.loadScreen(HOME_SCREEN_PATH, getStage(event), springContext);
 				break;
 			case GO_TO_CUSTOMER_SCREEN:
-				actionPerformer.loadScreen(CUSTOMER_SCREEN_PATH, stage);
+				actionPerformer.loadScreen(CUSTOMER_SCREEN_PATH, stage, springContext);
 				intializeData();
 				break;
 			case SEARCH:
@@ -77,10 +78,18 @@ public class CustomerController extends BaseController<Customer>{
 				break;
 			case EDIT:
 				actionPerformer.edit(custName, address, vatOrTin, vendorCode, selectedObj);
+				/*actionPerformer.resetUI(editButton, deleteButton, custName, address, vatOrTin, vendorCode, message,
+						selectedObj);*/
 				break;
 			case SAVE:
 				actionPerformer.save(custName.getText(), address.getText(), vatOrTin.getText(), vendorCode.getText(),
 						selectedObj, message, allObj);
+				actionPerformer.filteredTable(table, allObj, searchByCriteria, searchText);
+				break;
+			case DELETE:
+				actionPerformer.delete(selectedObj.getId(), allObj);
+				actionPerformer.resetUI(editButton, deleteButton, custName, address, vatOrTin, vendorCode, message,
+						selectedObj);
 				actionPerformer.filteredTable(table, allObj, searchByCriteria, searchText);
 				break;
 			default:
@@ -104,9 +113,10 @@ public class CustomerController extends BaseController<Customer>{
 		customerVat.setCellValueFactory(new PropertyValueFactory<Customer, String>("tin"));
 		customerAddress.setCellValueFactory(new PropertyValueFactory<Customer, String>("address"));
 
-		table.getItems().setAll(allObj);
+		table.getItems().setAll(allObj.values().stream()
+                .collect(Collectors.toList()));
 	}
-
+ 
 	@Override
 	public CustomerService getService() {
 		return customerService;

@@ -3,6 +3,8 @@ package com.rp.packers.packersapp.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 
 import com.rp.packers.packersapp.actions.ActionEnum;
 import com.rp.packers.packersapp.actions.ActionPerformer;
+import com.rp.packers.packersapp.model.Customer;
 import com.rp.packers.packersapp.model.Model;
 import com.rp.packers.packersapp.service.CrudService;
 
@@ -67,11 +70,12 @@ public abstract class BaseController<T extends Model> {
 	
 	protected String searchByCriteria;
 	
-	protected List<T> allObj = new ArrayList<>();
+	//protected List<T> allObj = new ArrayList<>();
+	protected Map<Long, T> allObj;
 
 	protected T selectedObj;
 	
-	protected ActionPerformer actionPerformer;
+	/*protected ActionPerformer actionPerformer;*/
 	
 	protected static final String HOME_SCREEN_PATH = "/fxml/HomeView.fxml";
 	
@@ -107,7 +111,8 @@ public abstract class BaseController<T extends Model> {
 	@FXML
 	protected void delete(MouseEvent event) {
 		LOGGER.info("Delete : " + selectedObj.getId());
-		getService().delete(selectedObj.getId());
+		dispatch(ActionEnum.DELETE, event, null);
+		
 	}
 	
 	protected Stage getStage(MouseEvent event) {
@@ -130,8 +135,13 @@ public abstract class BaseController<T extends Model> {
 						deleteButton.setDisable(false);
 					}
 				});
-		allObj = getService().getAll();
+		//allObj = getService().getAll();
+		allObj = (Map<Long, T>) getService().getAll().stream().collect(Collectors.toMap(T::getId, c -> c));
 		initializeTableData();
+	}
+	
+	public void delete() {
+		getService().delete(selectedObj.getId());
 	}
 
 	protected abstract void initializeTableData(); 
