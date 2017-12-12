@@ -94,7 +94,7 @@ public class CustomerActionPerformer implements ActionPerformer<Customer>{
 			TextField vatOrTin, TextField vendorCode, Label message, Customer selectedCustomer) {
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
-		selectedCustomer = null;
+		//selectedCustomer = new Customer();
 		custName.clear();
 		address.clear();
 		vatOrTin.clear();
@@ -115,15 +115,13 @@ public class CustomerActionPerformer implements ActionPerformer<Customer>{
 		Customer newCustomer = buildCustomer(name, address, vatOrTin, vendorCode, selectedCustomer);
 		customerService.create(newCustomer);
 		message.setText("Customer saved successfully.");
-		if(selectedCustomer == null) {
 			customers.put(newCustomer.getId(), newCustomer);
-		}
 	}
 	
 	private Customer buildCustomer(String name, String address, String vatOrTin, String vendorCode, Customer selectedCustomer) {
-		if(selectedCustomer == null) {
+		/*if(selectedCustomer == null) {
 			selectedCustomer = new Customer();
-		}
+		}*/
 		selectedCustomer.setName(name);
 		selectedCustomer.setAddress(address);
 		selectedCustomer.setTin(vatOrTin);

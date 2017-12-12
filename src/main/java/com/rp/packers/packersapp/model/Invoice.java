@@ -8,6 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -29,7 +32,13 @@ public class Invoice extends Model{
 	@Transient
 	private Boolean isChecked;
 	
-	@OneToMany(mappedBy="invoice", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
+	@JoinTable(
+	        name = "invoice_order", 
+	        joinColumns = { @JoinColumn(name = "invoice_id") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "order_id")
+	        		}
+	    )
 	private List<PurchaseOrder> orders;
 	
 	public Invoice() {

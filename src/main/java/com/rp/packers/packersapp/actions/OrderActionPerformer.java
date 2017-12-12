@@ -71,8 +71,8 @@ public class OrderActionPerformer implements ActionPerformer<PurchaseOrder>{
 	
 	private PurchaseOrder buildPurchaseOrder(Customer selectedItem, String description, String itemCode, String rate, String quantity, String total,
 			PurchaseOrder selectedObj) {
-		if(selectedObj == null) {
-			selectedObj = new PurchaseOrder();
+		if(selectedObj.getId() == null) {
+			//selectedObj = new PurchaseOrder();
 			selectedObj.setDateOfOrder(LocalDateTime.now());
 			selectedObj.setIsCompleted(false);
 		}
@@ -89,10 +89,10 @@ public class OrderActionPerformer implements ActionPerformer<PurchaseOrder>{
 		PurchaseOrder newOrder = buildPurchaseOrder(selectedItem, description, itemCode, rate, quantity, total, selectedObj);
 		service.create(newOrder);
 		message.setText("Order saved successfully.");
-		if(selectedObj == null) {
+		//if(selectedObj == null) {
 			allObj.put(newOrder.getId(), newOrder);
 			//allObj.add(newOrder);
-		}
+		//}
 	}
 	
 	public void add(Button editButton, Button deleteButton, ComboBox<Customer> customerName,
@@ -109,7 +109,7 @@ public class OrderActionPerformer implements ActionPerformer<PurchaseOrder>{
 			Label message) {
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
-		selectedObj = null;
+		//selectedObj = null;
 		
 		customerName.getSelectionModel().clearSelection();
 		description.clear();

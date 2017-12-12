@@ -95,7 +95,7 @@ public class InvoiceController extends BaseController<Invoice>{
 	@Autowired
 	private InvoiceService invoiceService;
 	
-	protected Map<Long, PurchaseOrder> selectedOrders;
+	protected Map<Long, PurchaseOrder> selectedOrders = new HashMap<>();
 	
 	private static final String INVOICE_SCREEN_PATH = "/fxml/invoiceView.fxml";
 
@@ -124,6 +124,7 @@ public class InvoiceController extends BaseController<Invoice>{
 			case GO_TO_INVOICE_SCREEN:
 				actionPerformer.loadScreen(INVOICE_SCREEN_PATH, stage, springContext);
 				intializeData();
+				selectedObj = new Invoice();
 				break;
 			case SAVE:
 				actionPerformer.save(selectedOrders,
@@ -134,17 +135,20 @@ public class InvoiceController extends BaseController<Invoice>{
 			case SEARCH:
 				actionPerformer.filteredTable(table, allObj, searchByCriteria, searchText);
 				break;
-			/*case ADD:
-				actionPerformer.add(editButton, deleteButton, custName, address, vatOrTin, vendorCode, message,
-						selectedObj);
+			case ADD:
+				selectedObj = new Invoice();
+				actionPerformer.add(editButton, deleteButton, customerName, total, cgst, sgst, finalAmount, message,
+						selectedObj, selectedOrders, orderTable);
 				break;
 			case EDIT:
-				actionPerformer.edit(custName, address, vatOrTin, vendorCode, selectedObj);
-				actionPerformer.resetUI(editButton, deleteButton, custName, address, vatOrTin, vendorCode, message,
-						selectedObj);
+				actionPerformer.edit(customerName, total, cgst, sgst,
+						finalAmount, selectedObj, selectedOrders,
+						orderTable);
+				/*actionPerformer.resetUI(editButton, deleteButton, custName, address, vatOrTin, vendorCode, message,
+						selectedObj);*/
 				break;
 			
-			case DELETE:
+			/*case DELETE:
 				actionPerformer.delete(selectedObj.getId(), allObj);
 				actionPerformer.resetUI(editButton, deleteButton, custName, address, vatOrTin, vendorCode, message,
 						selectedObj);
@@ -227,7 +231,9 @@ public class InvoiceController extends BaseController<Invoice>{
 		customerName.valueProperty().addListener(new ChangeListener<Customer>() {
 			@Override
 			public void changed(ObservableValue<? extends Customer> observable, Customer oldValue, Customer newValue) {
-				loadOrdersByCustomer(newValue.getOrder());
+				if(newValue != null) {
+					loadOrdersByCustomer(newValue.getOrder());
+				}
 			}
         });
 		

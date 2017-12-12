@@ -68,11 +68,13 @@ public class CustomerController extends BaseController<Customer>{
 			case GO_TO_CUSTOMER_SCREEN:
 				actionPerformer.loadScreen(CUSTOMER_SCREEN_PATH, stage, springContext);
 				intializeData();
+				selectedObj = new Customer();
 				break;
 			case SEARCH:
 				actionPerformer.filteredTable(table, allObj, searchByCriteria, searchText);
 				break;
 			case ADD:
+				selectedObj = new Customer();
 				actionPerformer.add(editButton, deleteButton, custName, address, vatOrTin, vendorCode, message,
 						selectedObj);
 				break;

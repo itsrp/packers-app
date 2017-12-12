@@ -16,6 +16,7 @@ import com.rp.packers.packersapp.actions.ActionEnum;
 import com.rp.packers.packersapp.actions.ActionPerformer;
 import com.rp.packers.packersapp.model.Customer;
 import com.rp.packers.packersapp.model.Model;
+import com.rp.packers.packersapp.model.PurchaseOrder;
 import com.rp.packers.packersapp.service.CrudService;
 
 import javafx.beans.value.ObservableValue;

@@ -1,6 +1,8 @@
 package com.rp.packers.packersapp.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -37,9 +41,8 @@ public class PurchaseOrder extends Model{
 	@JoinColumn(name="customer_id", nullable=false)
 	private Customer customer;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="invoice_id", nullable=true)
-	private Invoice invoice;
+	@ManyToMany(mappedBy="orders", cascade = { CascadeType.ALL })
+	private Set<Invoice> invoice = new HashSet<>();
 	
 	public PurchaseOrder() {
 		// TODO Auto-generated constructor stub
@@ -109,14 +112,14 @@ public class PurchaseOrder extends Model{
 		this.customer = customer;
 	}
 
-	public Invoice getInvoice() {
+	public Set<Invoice> getInvoice() {
 		return invoice;
 	}
 
-	public void setInvoice(Invoice invoice) {
+	public void setInvoice(Set<Invoice> invoice) {
 		this.invoice = invoice;
 	}
-	
+
 	public String getCustomerName() {
 		return this.customer.getName();
 	}

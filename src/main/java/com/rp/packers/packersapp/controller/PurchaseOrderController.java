@@ -138,6 +138,7 @@ public class PurchaseOrderController extends BaseController<PurchaseOrder>{
 				actionPerformer.filteredTable(table, allObj, searchByCriteria, searchText);
 				break;
 			case ADD:
+				selectedObj = new PurchaseOrder();
 				actionPerformer.add(editButton, deleteButton, customerName,
 						description, itemCode, rate, quantity,
 						total, selectedObj, message);
@@ -193,7 +194,7 @@ public class PurchaseOrderController extends BaseController<PurchaseOrder>{
 	@Override
 	protected void intializeData() {
 		super.intializeData();
-		
+		selectedObj = new PurchaseOrder();
 		rate.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue,
